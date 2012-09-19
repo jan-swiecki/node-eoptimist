@@ -1,6 +1,6 @@
 {
 	"name": "eoptimist",
-	"version": "0.1.1-1",
+	"version": "0.1.1-4",
 	"description": "Extended Optimist",
 	"bugs":
 	{
@@ -21,21 +21,13 @@
 		"type": "git",
 		"url": "https://github.com/jan-swiecki/node-eoptimist.git"
 	},
-	"directories":
-	{
-		"lib": "."
-	},
 	"files":
 	[
 		"package.json",
 		"eoptimist.co",
-		"README.m",
-		"eoptimist"
+		"eoptimist.js",
+		"README.m"
 	],
-	"bin":
-	{
-		"eoptimist": "./eoptimist"
-	},
 	"engines":
 	{
 		"node": "0.8.1"
