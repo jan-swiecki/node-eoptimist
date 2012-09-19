@@ -1,10 +1,13 @@
 # Eoptimist - Extended [optimist](https://github.com/substack/node-optimist)
+# Version 0.1.4-1-beta
 
 --
 
 ### <del>Version 0.1.1 was broken. Please download newest 0.1.3 version.
 
-### Currently fixing bugs, Eoptimist is NOT working properly at the moment.
+### <del>Currently fixing bugs, Eoptimist is NOT working properly at the moment.
+
+### Should be working now
 
 --
 
