@@ -1,6 +1,6 @@
 {
 	"name": "eoptimist",
-	"version": "0.1.0",
+	"version": "0.1.1-1",
 	"description": "Extended Optimist",
 	"bugs":
 	{
@@ -29,6 +29,7 @@
 	[
 		"package.json",
 		"eoptimist.co",
+		"README.m",
 		"eoptimist"
 	],
 	"bin":
