@@ -75,30 +75,28 @@ module.exports = require 'optimist'
 	.wrap 80
 	.options options
 
-# module.exports = optimist
-
 argv = optimist.argv
 
 if argv.version
 	console.log info
 else if argv.usage
-		extendedHelp = ->
-			help = optimist.help()
+	extendedHelp = ->
+		help = optimist.help()
 
-			if yaml and (e=yaml.examples)
-				help += "Examples:\n"
+		if yaml and (e=yaml.examples)
+			help += "Examples:\n"
 
-				wrap = (require 'wordwrap')(2,80)
+			wrap = (require 'wordwrap')(2,80)
 
-				for k in e
-					example = wrap e[k]
-					help += "#example\n"
+			for k in e
+				example = wrap e[k]
+				help += "#example\n"
 
-			help
+		help
 
-		showExtendedHelp = !(fn)->
-			if not fn then fn = console.error;
-			fn extendedHelp!
+	showExtendedHelp = !(fn)->
+		if not fn then fn = console.error;
+		fn extendedHelp!
 
 	showExtendedHelp!
 
