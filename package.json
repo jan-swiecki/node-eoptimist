@@ -1,0 +1,52 @@
+{
+	"name": "eoptimist",
+	"version": "0.1.0",
+	"description": "Extended Optimist",
+	"bugs":
+	{
+		"url": "https://github.com/jan-swiecki/node-eoptimist/issues",
+		"email": "jan.swiecki+eoptimist@gmail.com"
+	},
+	"main": "eoptimist",
+	"homepage": "https://github.com/jan-swiecki/node-eoptimist",
+	"keywords": ["extended optimist", "eoptimist"],
+	"author":
+	{
+		"name": "Jan Święcki",
+		"email": "jan.swiecki@gmail.com",
+		"url": "ministud.io/jan.swiecki"
+	},
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/jan-swiecki/node-eoptimist.git"
+	},
+	"directories":
+	{
+		"lib": "."
+	},
+	"files":
+	[
+		"package.json",
+		"eoptimist.co",
+		"eoptimist"
+	],
+	"bin":
+	{
+		"eoptimist": "./eoptimist"
+	},
+	"engines":
+	{
+		"node": "0.8.1"
+	},
+	"dependencies":
+	{
+		"optimist": ">=0.0.2",
+		"js-yaml": ">=1.0.2",
+		"colors": ">=0.6.0-1"
+	},
+	"devDependencies":
+	{
+		"coco": ">=0.8.0"
+	}
+}

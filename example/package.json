@@ -1,0 +1,22 @@
+{
+	"name": "example-program",
+	"version": "0.1.0",
+	"main": "example-program",
+	"directories":
+	{
+		"lib": "."
+	},
+	"files":
+	[
+		"package.json",
+		"example-program.js"
+	],
+	"bin":
+	{
+		"example-program": "./example-program.js"
+	},
+	"dependencies":
+	{
+		"eoptimist": ">=0.1.0"
+	}
+}

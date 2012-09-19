@@ -1,0 +1,18 @@
+# CLI.yaml
+name: example-program.js
+usage: example-program.js [options] [file]
+options:
+  h4x:
+    alias: h
+    description: omgh4x
+  wat:
+    alias:
+      - is
+      - dis
+    description: []
+    boolean: true
+  include FILE:
+    description: My awesome description.
+examples:
+  - node example-program.js --h4x awesome.js
+  - node example-program.js --version
