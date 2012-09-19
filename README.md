@@ -2,6 +2,10 @@
 
 --
 
+### Version 0.1.1 was broken. Please newest 0.1.2 version.
+
+--
+
 # Additions
 
 * Automatically scans (if exists) `package.json` file and adds `--version` (alias `--info`) CLI option that displays string:
