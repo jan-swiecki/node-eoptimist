@@ -2,7 +2,7 @@
 
 --
 
-### Version 0.1.1 was broken. Please download newest 0.1.2 version.
+### Version 0.1.1 was broken. Please download newest 0.1.3 version.
 
 --
 

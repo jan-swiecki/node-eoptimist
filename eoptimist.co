@@ -13,12 +13,6 @@ catch e
 	console.log "Error retrieving package.json".red.bold
 	console.log e
 
-# console.log PACKAGE_JSON
-
-# add 'Examples: ... ' to usage
-# (use CLI.yaml.examples)
-
-
 options = 
 	'version':
 		alias: 'info'
@@ -29,14 +23,12 @@ options =
 		boolean: true
 		description: 'Display help'
 
-# optimist
-# 	.options(
-# 	)
-# 	.wrap 80
-
 # get CLI.yaml
 yaml_path = PARENT_PATH+'/CLI.yaml'
-yaml = {}
+yaml =
+	usage: ''
+	options: {}
+
 if fs.existsSync yaml_path
 	try
 		yaml = require yaml_path
@@ -44,44 +36,23 @@ if fs.existsSync yaml_path
 		console.log "Yaml: ".red.bold, e
 
 	if yaml
-		# optimist.options yaml.options
-		# yaml.usage = "Usage: "+yaml.usage
+		yaml.usage = "Usage: "+yaml.usage
 		
 		options <<< yaml.options
 		yaml.options = undefined
-		# optimist.usage   "Usage: "+yaml.usage
-		# optimist.examples = yaml.examples
-
-# argv = optimist.argv
-
-# optimist.wrap 80
-
-
-# optimist = (require 'optimist')()
-
-
-# optimist
-# 	.wrap 80
-# 	.options options
-
-# inst = optimist process.argv.slice(2)
-# Object.keys(inst).forEach (key)->
-# 	if Argv[key] = typeof inst[key] == 'function'
-# 		inst[key].bind(inst)
-# 	else
-# 		inst[key]
 
 module.exports = require 'optimist'
 	.wrap 80
 	.options options
+	.usage yaml.usage
 
-argv = optimist.argv
+argv = module.exports.argv
 
 if argv.version
 	console.log info
 else if argv.usage
 	extendedHelp = ->
-		help = optimist.help()
+		help = module.exports.help()
 
 		if yaml and (e=yaml.examples)
 			help += "Examples:\n"
@@ -99,19 +70,3 @@ else if argv.usage
 		fn extendedHelp!
 
 	showExtendedHelp!
-
-# module.exports = require 'optimist'
-# 	.wrap 80
-# 	.options options
-# 	.argv
-
-# module.exports = argv
-# module.exports = optimist
-
-# module.exports = optimist
-# module.exports = ->
-	# if yaml then optimist.options yaml.options
-	# optimist
-# module.exports =
-# 	optimist: optimist
-	# yaml: yaml

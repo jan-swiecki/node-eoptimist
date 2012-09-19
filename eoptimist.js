@@ -25,7 +25,10 @@ options = {
   }
 };
 yaml_path = PARENT_PATH + '/CLI.yaml';
-yaml = {};
+yaml = {
+  usage: '',
+  options: {}
+};
 if (fs.existsSync(yaml_path)) {
   try {
     yaml = require(yaml_path);
@@ -34,18 +37,19 @@ if (fs.existsSync(yaml_path)) {
     console.log("Yaml: ".red.bold, e);
   }
   if (yaml) {
+    yaml.usage = "Usage: " + yaml.usage;
     import$(options, yaml.options);
     yaml.options = undefined;
   }
 }
-module.exports = require('optimist').wrap(80).options(options);
-argv = optimist.argv;
+module.exports = require('optimist').wrap(80).options(options).usage(yaml.usage);
+argv = module.exports.argv;
 if (argv.version) {
   console.log(info);
 } else if (argv.usage) {
   extendedHelp = function(){
     var help, e, wrap, k, example;
-    help = optimist.help();
+    help = module.exports.help();
     if (yaml && (e = yaml.examples)) {
       help += "Examples:\n";
       wrap = require('wordwrap')(2, 80);
