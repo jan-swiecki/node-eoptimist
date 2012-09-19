@@ -1,6 +1,6 @@
-# Eoptimist
+# Eoptimist - Extended [optimist](https://github.com/substack/node-optimist)
 
-Extends [optimist](https://github.com/substack/node-optimist) functionality.
+--
 
 # Additions
 
@@ -61,3 +61,17 @@ Extends [optimist](https://github.com/substack/node-optimist) functionality.
 
 		$ node example-program.js --version
 		example-program 0.1.0
+
+# Installation
+
+`npm install eoptimist`
+
+or
+
+	git clone https://github.com/jan-swiecki/node-eoptimist
+	mkdir node_modules
+	mv node-eoptimist node_modules/eoptimist
+	cd node_modules/eoptimist
+	npm install
+
+(On windows use `move` instead of `mv`)
