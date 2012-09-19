@@ -15,65 +15,105 @@ catch e
 
 # console.log PACKAGE_JSON
 
-optimist = require 'optimist'
-
 # add 'Examples: ... ' to usage
 # (use CLI.yaml.examples)
-optimist <<<
-	extendedHelp: ->
-		help = optimist.help()
 
-		if e=optimist.examples
-			help += "Examples:\n"
 
-			wrap = (require 'wordwrap')(2,80)
+options = 
+	'version':
+		alias: 'info'
+		boolean: true
+		description: 'Display current version'
+	'usage':
+		alias: 'help'
+		boolean: true
+		description: 'Display help'
 
-			for k in e
-				example = wrap e[k]
-				help += "#example\n"
-
-		help
-
-	showExtendedHelp: !(fn)->
-		if not fn then fn = console.error;
-		fn optimist.extendedHelp!
-
-optimist
-	.options(
-		'version':
-			alias: 'info'
-			boolean: true
-		'usage':
-			alias: 'help'
-			boolean: true
-	)
-	.describe(
-		'version': 'Display current version'
-		'usage': 'Display help'
-	)
-	.wrap 80
+# optimist
+# 	.options(
+# 	)
+# 	.wrap 80
 
 # get CLI.yaml
 yaml_path = PARENT_PATH+'/CLI.yaml'
-yaml = null
+yaml = {}
 if fs.existsSync yaml_path
 	try
 		yaml = require yaml_path
 	catch e
 		console.log "Yaml: ".red.bold, e
 
-	if yaml?	
-		optimist.options yaml.options
-		optimist.usage   "Usage: "+yaml.usage
-		optimist.examples = yaml.examples
+	if yaml
+		# optimist.options yaml.options
+		# yaml.usage = "Usage: "+yaml.usage
+		
+		options <<< yaml.options
+		yaml.options = undefined
+		# optimist.usage   "Usage: "+yaml.usage
+		# optimist.examples = yaml.examples
+
+# argv = optimist.argv
+
+# optimist.wrap 80
+
+
+# optimist = (require 'optimist')()
+
+
+# optimist
+# 	.wrap 80
+# 	.options options
+
+# inst = optimist process.argv.slice(2)
+# Object.keys(inst).forEach (key)->
+# 	if Argv[key] = typeof inst[key] == 'function'
+# 		inst[key].bind(inst)
+# 	else
+# 		inst[key]
+
+module.exports = require 'optimist'
+	.wrap 80
+	.options options
+
+# module.exports = optimist
 
 argv = optimist.argv
 
 if argv.version
 	console.log info
 else if argv.usage
-	optimist.showExtendedHelp!
+		extendedHelp = ->
+			help = optimist.help()
 
-# return optimist
-module.exports = optimist
+			if yaml and (e=yaml.examples)
+				help += "Examples:\n"
 
+				wrap = (require 'wordwrap')(2,80)
+
+				for k in e
+					example = wrap e[k]
+					help += "#example\n"
+
+			help
+
+		showExtendedHelp = !(fn)->
+			if not fn then fn = console.error;
+			fn extendedHelp!
+
+	showExtendedHelp!
+
+# module.exports = require 'optimist'
+# 	.wrap 80
+# 	.options options
+# 	.argv
+
+# module.exports = argv
+# module.exports = optimist
+
+# module.exports = optimist
+# module.exports = ->
+	# if yaml then optimist.options yaml.options
+	# optimist
+# module.exports =
+# 	optimist: optimist
+	# yaml: yaml

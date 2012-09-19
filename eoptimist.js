@@ -1,4 +1,4 @@
-var fs, PARENT_PATH, info, PACKAGE_JSON, e, optimist, yaml_path, yaml, argv;
+var fs, PARENT_PATH, info, PACKAGE_JSON, e, optimist_fns, options, yaml_path, yaml, optimist, argv;
 fs = require('fs');
 require('colors');
 require('js-yaml');
@@ -12,41 +12,41 @@ try {
   console.log("Error retrieving package.json".red.bold);
   console.log(e);
 }
-optimist = require('optimist');
-optimist.extendedHelp = function(){
-  var help, e, wrap, k, example;
-  help = optimist.help();
-  if (e = optimist.examples) {
-    help += "Examples:\n";
-    wrap = require('wordwrap')(2, 80);
-    for (k in e) {
-      example = wrap(e[k]);
-      help += example + "\n";
+optimist_fns = {
+  extendedHelp: function(){
+    var help, e, wrap, k, example;
+    help = optimist.help();
+    if (e = optimist.examples) {
+      help += "Examples:\n";
+      wrap = require('wordwrap')(2, 80);
+      for (k in e) {
+        example = wrap(e[k]);
+        help += example + "\n";
+      }
     }
+    return help;
+  },
+  showExtendedHelp: function(fn){
+    if (!fn) {
+      fn = console.error;
+    }
+    fn(optimist.extendedHelp());
   }
-  return help;
 };
-optimist.showExtendedHelp = function(fn){
-  if (!fn) {
-    fn = console.error;
-  }
-  fn(optimist.extendedHelp());
-};
-optimist.options({
+options = {
   'version': {
     alias: 'info',
-    boolean: true
+    boolean: true,
+    description: 'Display current version'
   },
   'usage': {
     alias: 'help',
-    boolean: true
+    boolean: true,
+    description: 'Display help'
   }
-}).describe({
-  'version': 'Display current version',
-  'usage': 'Display help'
-}).wrap(80);
+};
 yaml_path = PARENT_PATH + '/CLI.yaml';
-yaml = null;
+yaml = {};
 if (fs.existsSync(yaml_path)) {
   try {
     yaml = require(yaml_path);
@@ -54,16 +54,25 @@ if (fs.existsSync(yaml_path)) {
     e = e$;
     console.log("Yaml: ".red.bold, e);
   }
-  if (yaml != null) {
-    optimist.options(yaml.options);
-    optimist.usage("Usage: " + yaml.usage);
-    optimist.examples = yaml.examples;
+  if (yaml) {
+    import$(options, yaml.options);
+    yaml.options = undefined;
   }
 }
+optimist = require('optimist').wrap(80).options(options);
+import$(optimist, optimist_fns);
+if (yaml) {
+  import$(optimist, yaml);
+}
+module.exports = optimist;
 argv = optimist.argv;
 if (argv.version) {
   console.log(info);
 } else if (argv.usage) {
   optimist.showExtendedHelp();
 }
-module.exports = optimist;
+function import$(obj, src){
+  var own = {}.hasOwnProperty;
+  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
+  return obj;
+}
