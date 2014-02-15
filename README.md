@@ -1,15 +1,7 @@
 # Eoptimist - Extended [optimist](https://github.com/substack/node-optimist)
 # Version 0.1.4-1-beta
 
---
-
-### <del>Version 0.1.1 was broken. Please download newest 0.1.3 version.
-
-### <del>Currently fixing bugs, Eoptimist is NOT working properly at the moment.
-
-### Should be working now
-
---
+Note: Please consider using [Easy CLI](https://github.com/jan-swiecki/node-easy-cli) instead. [Easy CLI](https://github.com/jan-swiecki/node-easy-cli) is a project which emerged from this one.
 
 # Additions
 
